@@ -101,6 +101,7 @@ class BurgerBuilder extends Component {
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
+                    ingredients={this.state.ingredients}
                     price={this.state.totalPrice}
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemove={this.removeIngredientHandler}
