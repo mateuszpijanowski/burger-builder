@@ -8,13 +8,6 @@ import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
-const INGEDIENT_PRICES = {
-    salad: 0.5,
-    bacon: 1,
-    meat: 1.5,
-    cheese: 0.4
-};
-
 class BurgerBuilder extends Component {
     state = {
         ingredients: {
@@ -23,11 +16,22 @@ class BurgerBuilder extends Component {
             cheese: 0,
             meat: 0
         },
+        ingredients_price: null,
         totalPrice: 5,
         purchasable: false,
         purchasing: false,
         loading: false
     };
+
+    componentDidMount() {
+        axios.get('https://my-burger-ca526.firebaseio.com/ingredients_price.json')
+            .then(res => {
+                this.setState({ ingredients_price: res.data });
+            })
+            .catch(err => {
+                return err;
+            })
+    }
 
     purchaseHandler = () => {
         this.setState({ purchasing: true });
@@ -84,7 +88,7 @@ class BurgerBuilder extends Component {
             ...this.state.ingredients
         };
         updatedIngredients[type]=updateCount;
-        const priceAddition = INGEDIENT_PRICES[type];
+        const priceAddition = this.state.ingredients_price[type];
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice + priceAddition;
 
@@ -102,7 +106,7 @@ class BurgerBuilder extends Component {
         updatedIngredients[type]=updateCount;
         const oldPrice = this.state.totalPrice;
         if (oldPrice <= 5) return;
-        const priceDeduction = INGEDIENT_PRICES[type];
+        const priceDeduction = this.state.ingredients_price[type];
         const newPrice = oldPrice - priceDeduction;
 
         this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
@@ -117,12 +121,30 @@ class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
 
-        let orderSummary = <OrderSummary
-            price={this.state.totalPrice}
-            ingredients={this.state.ingredients}
-            purchaseCancled={this.purchaseCancelHandler}
-            purchaseContinued={this.purchaseContinueHandler} />;
+        let orderSummary = null;
+        let burger = <Spinner />;
 
+        if (this.state.ingredients_price) {
+            burger = (
+                <Aux>
+                    <Burger ingredients={this.state.ingredients} />
+                    <BuildControls
+                        ingredients={this.state.ingredients}
+                        price={this.state.totalPrice}
+                        ingredientAdded={this.addIngredientHandler}
+                        ingredientRemove={this.removeIngredientHandler}
+                        disabled={disabledInfo}
+                        ordered={this.purchaseHandler}
+                        purchasable={this.state.purchasable} />
+                </Aux>
+            );
+            orderSummary = <OrderSummary
+                price={this.state.totalPrice}
+                ingredients={this.state.ingredients}
+                purchaseCancled={this.purchaseCancelHandler}
+                purchaseContinued={this.purchaseContinueHandler} />;
+        }
+        
         if (this.state.loading) {
             orderSummary = <Spinner />;
         }
@@ -132,15 +154,7 @@ class BurgerBuilder extends Component {
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     {orderSummary}
                 </Modal>
-                <Burger ingredients={this.state.ingredients} />
-                <BuildControls
-                    ingredients={this.state.ingredients}
-                    price={this.state.totalPrice}
-                    ingredientAdded={this.addIngredientHandler}
-                    ingredientRemove={this.removeIngredientHandler}
-                    disabled={disabledInfo}
-                    ordered={this.purchaseHandler}
-                    purchasable={this.state.purchasable} />
+                {burger}
             </Aux>
         );
     }
