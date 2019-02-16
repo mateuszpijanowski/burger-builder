@@ -6,6 +6,8 @@ import axios from "../../../axios-orders";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 
+import {connect} from "react-redux";
+
 class ContactData extends Component {
     state = {
         orderForm: {
@@ -106,7 +108,7 @@ class ContactData extends Component {
         formIsValid: false
     };
 
-    checkValidity(value, rules) {
+    static checkValidity(value, rules) {
         let isValid = true;
 
         if (!rules) {
@@ -137,8 +139,8 @@ class ContactData extends Component {
         }
 
         const order = {
-            ingredients: this.props.ingredients,
-            price: this.props.price,
+            ingredients: this.props.ig,
+            price: this.props.pri,
             orderData: formData,
         };
 
@@ -158,10 +160,9 @@ class ContactData extends Component {
         const inputElCopy = { ...orderFormCopy[inputID] };
 
         inputElCopy.value = event.target.value;
-        inputElCopy.valid = this.checkValidity(inputElCopy.value, inputElCopy.validation);
+        inputElCopy.valid = ContactData.checkValidity(inputElCopy.value, inputElCopy.validation);
         inputElCopy.touched = true;
         orderFormCopy[inputID] = inputElCopy;
-        console.log(inputElCopy);
 
         let formIsValid = true;
 
@@ -212,4 +213,11 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+    return {
+        ig: state.ingredients,
+        pri: state.totalPrice
+    }
+};
+
+export default connect(mapStateToProps)(ContactData);
