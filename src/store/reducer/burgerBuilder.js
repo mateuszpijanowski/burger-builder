@@ -1,27 +1,25 @@
-import * as actionTypes from './actions';
+import * as actionTypes from '../actions/actionTypes';
 
 const initState = {
-    ingredients: {
-        salad: 0,
-        bacon: 0,
-        cheese: 0,
-        meat: 0
-    },
+    ingredients: null,
+    igPrice: null,
     totalPrice: 5,
+    error: false
 };
 
-const reducer = (state = initState, action) => {
+const burgerBuilder = (state = initState, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_IG:
             const oldCount = state.ingredients[action.igType];
             const updateCount = oldCount + 1;
             const updatedIngredients = { ...state.ingredients };
             updatedIngredients[action.igType]=updateCount;
-            const priceAddition = action.igPrice[action.igType];
+            const priceAddition = state.igPrice[action.igType];
             const oldPrice = state.totalPrice;
             const newPrice = oldPrice + priceAddition;
 
             return {
+                ...state,
                 ingredients: updatedIngredients,
                 totalPrice: newPrice
             };
@@ -37,16 +35,34 @@ const reducer = (state = initState, action) => {
             updatedIngredientsR[action.igType]=updateCountR;
             const oldPriceR = state.totalPrice;
             if (oldPriceR <= 5) return;
-            const priceDeduction = action.igPrice[action.igType];
+            const priceDeduction = state.igPrice[action.igType];
             const newPriceR = oldPriceR - priceDeduction;
 
             return {
+                ...state,
                 ingredients: updatedIngredientsR,
                 totalPrice: newPriceR
+            };
+        case actionTypes.SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: action.ingredients,
+                error: false
+            };
+        case actionTypes.SET_INGREDIENTS_PRICE:
+            return {
+                ...state,
+                igPrice: action.igPrice,
+                error: false
+        };
+        case actionTypes.FETCH_INGREDIENTS_FAILED:
+            return {
+                ...state,
+                error: true
             };
     }
 
     return state;
 };
 
-export default reducer;
+export default burgerBuilder;

@@ -7,10 +7,10 @@ const buildControls = (props) => {
         .map(igKey => props.ingredients[igKey] );
 
     const controls = [
-        { label: 'Salad', type: 'salad', count: ingredientsCount[0] },
-        { label: 'Bacon', type: 'bacon', count: ingredientsCount[1] },
-        { label: 'Cheese', type: 'cheese', count: ingredientsCount[2] },
-        { label: 'Meat', type: 'meat', count: ingredientsCount[3] },
+        { label: 'Salad', type: 'salad', count: ingredientsCount[3] },
+        { label: 'Bacon', type: 'bacon', count: ingredientsCount[0] },
+        { label: 'Cheese', type: 'cheese', count: ingredientsCount[1] },
+        { label: 'Meat', type: 'meat', count: ingredientsCount[2] },
     ];
 
     return (
