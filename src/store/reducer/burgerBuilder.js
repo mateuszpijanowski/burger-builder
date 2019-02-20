@@ -4,7 +4,8 @@ const initState = {
     ingredients: null,
     igPrice: null,
     totalPrice: 5,
-    error: false
+    error: false,
+    loading: false
 };
 
 const burgerBuilder = (state = initState, action) => {
@@ -43,26 +44,35 @@ const burgerBuilder = (state = initState, action) => {
                 ingredients: updatedIngredientsR,
                 totalPrice: newPriceR
             };
+        case actionTypes.INGREDIENTS_LOADING:
+            return {
+                ...state,
+                loading: true
+            };
         case actionTypes.SET_INGREDIENTS:
             return {
                 ...state,
+                totalPrice: 5,
                 ingredients: action.ingredients,
-                error: false
+                error: false,
+                loading: false
             };
         case actionTypes.SET_INGREDIENTS_PRICE:
             return {
                 ...state,
                 igPrice: action.igPrice,
-                error: false
-        };
+                error: false,
+                loading: false
+            };
         case actionTypes.FETCH_INGREDIENTS_FAILED:
             return {
                 ...state,
-                error: true
+                error: true,
+                loading: false
             };
+        default:
+            return state;
     }
-
-    return state;
 };
 
 export default burgerBuilder;

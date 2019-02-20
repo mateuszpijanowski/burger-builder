@@ -31,6 +31,12 @@ export const setIngredientsPrice = (igPrice) => {
     }
 };
 
+export const loadingIngredients = () => {
+    return {
+        type: actionTypes.INGREDIENTS_LOADING
+    };
+};
+
 export const fetchIngredientsFailed = () => {
     return {
         type: actionTypes.FETCH_INGREDIENTS_FAILED

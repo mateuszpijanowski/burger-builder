@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
-import axios from "../../../axios-orders";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
+import * as actions from '../../../store/actions/index';
 
 import {connect} from "react-redux";
 
@@ -104,7 +104,6 @@ class ContactData extends Component {
                 valid: true
             },
         },
-        loading: false,
         formIsValid: false
     };
 
@@ -132,7 +131,7 @@ class ContactData extends Component {
 
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({ loading: true });
+        this.props.onStartBurger();
         const formData = {};
         for (let formElId in this.state.orderForm) {
             formData[formElId] = this.state.orderForm[formElId].value;
@@ -144,15 +143,7 @@ class ContactData extends Component {
             orderData: formData,
         };
 
-        axios.post('/orders.json', order)
-            .then(response => {
-                console.log(response);
-                this.setState({ loading: false });
-                this.props.history.push('/');
-            })
-            .catch(err => {
-                this.setState({ loading: false });
-            });
+        this.props.onOrderBurger(order);
     };
 
     inputChangeHandler = (event, inputID) => {
@@ -174,6 +165,8 @@ class ContactData extends Component {
     };
 
     render() {
+        console.log(this.props.loading);
+
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
             formElementsArray.push({
@@ -200,7 +193,7 @@ class ContactData extends Component {
             </form>
         );
 
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = <Spinner />
         }
 
@@ -215,9 +208,17 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
     return {
-        ig: state.ingredients,
-        pri: state.totalPrice
+        ig: state.burgerBuilder.ingredients,
+        pri: state.burgerBuilder.totalPrice,
+        loading: state.order.loading
     }
 };
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+    return {
+        onStartBurger: () => dispatch(actions.purchaseBurgerStart()),
+        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactData);
