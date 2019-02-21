@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility';
 
 const initState = {
     ingredients: null,
@@ -8,70 +9,59 @@ const initState = {
     loading: false
 };
 
+const addIngredients = (state, action) => {
+    const updatedIngredient = { [action.igType]: state.ingredients[action.igType] + 1 };
+    const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
+    const updatedState = {
+        ingredients: updatedIngredients,
+        totalPrice: state.totalPrice + state.igPrice[action.igType]
+    };
+    return updateObject(state, updatedState);
+};
+
+const removeIngredients = (state, action) => {
+    const updatedIngredientR = { [action.igType]: state.ingredients[action.igType] + 1 };
+    const updatedIngredientsR = updateObject(state.ingredients, updatedIngredientR);
+    const updatedStateR = {
+        ingredients: updatedIngredientsR,
+        totalPrice: state.totalPrice + state.igPrice[action.igType]
+    };
+    return updateObject(state, updatedStateR);
+};
+
+const setIngredients = (state, action) => {
+    return updateObject(state, {
+        totalPrice: 5,
+        ingredients: action.ingredients,
+        error: false,
+        loading: false
+    });
+};
+
+const setIngredientsPrice = (state, action) => {
+    return updateObject(state, {
+        igPrice: action.igPrice,
+        error: false,
+        loading: false
+    });
+};
+
+const fetchIngredientsFailed = (state, action) => {
+    return updateObject(state, {
+        error: true,
+        loading: false
+    });
+};
+
 const burgerBuilder = (state = initState, action) => {
     switch (action.type) {
-        case actionTypes.UPDATE_IG:
-            const oldCount = state.ingredients[action.igType];
-            const updateCount = oldCount + 1;
-            const updatedIngredients = { ...state.ingredients };
-            updatedIngredients[action.igType]=updateCount;
-            const priceAddition = state.igPrice[action.igType];
-            const oldPrice = state.totalPrice;
-            const newPrice = oldPrice + priceAddition;
-
-            return {
-                ...state,
-                ingredients: updatedIngredients,
-                totalPrice: newPrice
-            };
-        case actionTypes.REMOVE_IG:
-            const oldCountR = state.ingredients[action.igType];
-            if (oldCountR <= 0) {
-                return {
-                    ...state
-                };
-            }
-            const updateCountR = oldCountR - 1;
-            const updatedIngredientsR = { ...state.ingredients };
-            updatedIngredientsR[action.igType]=updateCountR;
-            const oldPriceR = state.totalPrice;
-            if (oldPriceR <= 5) return;
-            const priceDeduction = state.igPrice[action.igType];
-            const newPriceR = oldPriceR - priceDeduction;
-
-            return {
-                ...state,
-                ingredients: updatedIngredientsR,
-                totalPrice: newPriceR
-            };
-        case actionTypes.INGREDIENTS_LOADING:
-            return {
-                ...state,
-                loading: true
-            };
-        case actionTypes.SET_INGREDIENTS:
-            return {
-                ...state,
-                totalPrice: 5,
-                ingredients: action.ingredients,
-                error: false,
-                loading: false
-            };
-        case actionTypes.SET_INGREDIENTS_PRICE:
-            return {
-                ...state,
-                igPrice: action.igPrice,
-                error: false,
-                loading: false
-            };
-        case actionTypes.FETCH_INGREDIENTS_FAILED:
-            return {
-                ...state,
-                error: true,
-                loading: false
-            };
-        default:
-            return state;
+        case actionTypes.UPDATE_IG: return addIngredients(state, action);
+        case actionTypes.REMOVE_IG: return removeIngredients(state, action);
+        case actionTypes.INGREDIENTS_LOADING: return updateObject(state, { loading: true });
+        case actionTypes.SET_INGREDIENTS: return setIngredients(state, action);
+        case actionTypes.SET_INGREDIENTS_PRICE: return setIngredientsPrice(state, action);
+        case actionTypes.FETCH_INGREDIENTS_FAILED: return fetchIngredientsFailed(state, action);
+        default: return state;
     }
 };
 

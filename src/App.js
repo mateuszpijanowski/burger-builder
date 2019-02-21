@@ -5,6 +5,18 @@ import Checkout from './containers/Checkout/Checkout';
 import { Route, Switch } from "react-router-dom";
 import Orders from './containers/Checkout/Orders/Orders';
 
+/*
+    TODO:
+        1. Make a delete button in order section
+        2. Make a view detail in order section
+        3. Create authentication system
+        4. Create advanced validation system
+        5. Create README file
+        6. Testing
+        7. Deploy project
+        *Clear and upgrade quality of code
+ */
+
 class App extends Component {
   render() {
     return (
