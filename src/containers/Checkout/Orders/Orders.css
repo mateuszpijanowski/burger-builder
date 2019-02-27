@@ -1,0 +1,7 @@
+.Data {
+    text-transform: capitalize;
+    display: inline-block;
+    margin: 6px 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}

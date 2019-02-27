@@ -9,6 +9,7 @@ export {
     purchaseInit,
     purchaseBurgerStart,
     fetchOrders,
-    fetchOrdersStart
+    fetchOrdersStart,
+    removeOrder
 } from './order'
 

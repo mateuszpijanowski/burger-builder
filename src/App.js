@@ -8,13 +8,12 @@ import Auth from './containers/Auth/Auth';
 
 /*
     TODO:
-        1. Make a delete button in order section
-        2. Make a view detail in order section
-        3. Create authentication system
-        4. Create advanced validation system
-        5. Create README file
-        6. Testing
-        7. Deploy project
+        1. Auto-close SideDrawer if page has been changed
+        2. Create authentication system
+        3. Create advanced validation system
+        4. Create README file
+        5. Testing
+        6. Deploy project
         *Clear and upgrade quality of code
  */
 

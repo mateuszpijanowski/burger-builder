@@ -32,6 +32,6 @@ class layout extends Component {
             </Aux>
         );
     }
-};
+}
 
 export default layout;
