@@ -11,5 +11,8 @@ export {
     fetchOrders,
     fetchOrdersStart,
     removeOrder
-} from './order'
+} from './order';
+export {
+    auth
+} from './auth';
 
