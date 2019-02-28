@@ -8,12 +8,11 @@ import Auth from './containers/Auth/Auth';
 
 /*
     TODO:
-        1. Auto-close SideDrawer if page has been changed
-        2. Create authentication system
-        3. Create advanced validation system
-        4. Create README file
-        5. Testing
-        6. Deploy project
+        1. Create authentication system*
+        2. Create advanced validation system
+        3. Create README file
+        4. Testing
+        5. Deploy project
         *Clear and upgrade quality of code
  */
 
