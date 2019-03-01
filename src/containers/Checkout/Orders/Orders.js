@@ -18,11 +18,11 @@ class Orders extends Component {
 
     componentDidMount() {
         this.props.onFetchOrdersStart();
-        this.props.onFetchOrders();
+        this.props.onFetchOrders(this.props.token);
     }
 
     removeOrderHandler = (orderId) => {
-        this.props.onRemoveOrder(orderId);
+        this.props.onRemoveOrder(orderId, this.props.token);
         this.props.onFetchOrders();
     };
 
@@ -94,15 +94,16 @@ class Orders extends Component {
 const mapStateToProps = state => {
     return {
         orders: state.order.orders,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchOrders: () => dispatch(actions.fetchOrders()),
+        onFetchOrders: (token) => dispatch(actions.fetchOrders(token)),
         onFetchOrdersStart: () => dispatch(actions.fetchOrdersStart()),
-        onRemoveOrder: (orderId) => dispatch(actions.removeOrder(orderId))
+        onRemoveOrder: (orderId, token) => dispatch(actions.removeOrder(orderId, token))
     };
 };
 

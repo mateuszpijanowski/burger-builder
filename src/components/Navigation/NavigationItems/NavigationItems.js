@@ -6,7 +6,7 @@ const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
         <NavigationItem closed={props.closed} link="/">Burger Builder</NavigationItem>
         <NavigationItem closed={props.closed} link="/orders">Orders</NavigationItem>
-        <NavigationItem closed={props.closed} link="/auth">Log in</NavigationItem>
+        <NavigationItem closed={props.closed} link="/auth">Authentication</NavigationItem>
     </ul>
 );
 

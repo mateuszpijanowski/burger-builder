@@ -10,8 +10,8 @@ import Auth from './containers/Auth/Auth';
     TODO:
         1. Create authentication system*
         2. Create advanced validation system
-        3. Create README file
-        4. Testing
+        3. Testing
+        4. Create README file
         5. Deploy project
         *Clear and upgrade quality of code
  */
