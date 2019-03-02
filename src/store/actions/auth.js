@@ -15,16 +15,23 @@ export const authSuccess = (token, userId) => {
     };
 };
 
-export const authFail = (error) => {
+export const setAuthRedirectAuth = (path) => {
     return {
-        type: actionTypes.AUTH_FAIL,
-        error: error
+        type: actionTypes.SET_AUTH_REDIRECT_PATH,
+        path: path
     };
 };
 
 export const logout = () => {
     return {
         type: actionTypes.AUTH_LOGOUT
+    };
+};
+
+export const authFail = (error) => {
+    return {
+        type: actionTypes.AUTH_FAIL,
+        error: error
     };
 };
 

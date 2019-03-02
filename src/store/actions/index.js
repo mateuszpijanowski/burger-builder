@@ -13,6 +13,8 @@ export {
     removeOrder
 } from './order';
 export {
-    auth
+    auth,
+    logout,
+    setAuthRedirectAuth
 } from './auth';
 
