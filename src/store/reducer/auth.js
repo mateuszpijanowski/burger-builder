@@ -4,6 +4,7 @@ import { updateObject } from '../utility';
 const initState = {
     token: null,
     userId: null,
+    isAdmin: false,
     error: null,
     loading: false,
     authRedirectPath: '/'
@@ -20,15 +21,17 @@ const authSuccess = (state, action) => {
     return updateObject(state, {
         token: action.idToken,
         userId: action.userId,
+        isAdmin: action.isAdmin,
         error: null,
-        loading: false,
+        loading: false
     });
 };
 
 const authLogout = (state) => {
     return updateObject(state, {
         token: null,
-        userId: null
+        userId: null,
+        isAdmin: false
     });
 };
 

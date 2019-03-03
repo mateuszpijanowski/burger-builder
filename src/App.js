@@ -11,15 +11,11 @@ import * as actions from './store/actions/index';
 
 /*
     TODO:
-        1. Create authentication system*
-            1.1. Fix Redirect to checkout
-            1.2. Add delete account button
-            1.3. Add admin account
-        2. Create advanced validation system
-        3. Testing
-        4. Create README file
-        5. Deploy project
-        *Clear and upgrade quality of code
+        1. Create advanced validation system
+        2. Testing
+        3. Create README file
+        4. Deploy project
+        *Clear and upgrade quality code
  */
 
 class App extends Component {
@@ -42,6 +38,7 @@ class App extends Component {
                     <Route path="/orders" component={Orders}/>
                     <Route path="/checkout" component={Checkout} />
                     <Route path="/logout" component={Logout} />
+                    <Route path="/auth" component={Auth} />
                     <Route path="/" exact component={BurgerBuilder} />
                     <Redirect to="/" />
                 </Switch>

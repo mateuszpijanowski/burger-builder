@@ -18,12 +18,30 @@ class Orders extends Component {
 
     componentDidMount() {
         this.props.onFetchOrdersStart();
-        this.props.onFetchOrders(this.props.token, this.props.userId);
+        this.props.onFetchOrders(
+            this.props.token,
+            this.props.userId,
+            this.props.isAdmin
+        );
     }
 
     removeOrderHandler = (orderId) => {
-        this.props.onRemoveOrder(orderId, this.props.token);
-        this.props.onFetchOrders(this.props.token, this.props.userId);
+        this.props.onRemoveOrder(
+            orderId,
+            this.props.token,
+            this.props.userId,
+            this.props.isAdmin
+        );
+    };
+
+    finishOrderHandler = (orderId, status) => {
+        this.props.onFinishOrder(
+            orderId,
+            this.props.token,
+            this.props.userId,
+            this.props.isAdmin,
+            status
+        );
     };
 
     orderHiddenDetailsHandler = () => {
@@ -64,6 +82,8 @@ class Orders extends Component {
                     <p className={classes.Data}>{this.props.orders[this.state.nr].orderData.country}</p></div>
                 <div>Delivery method:
                     <p className={classes.Data}>{this.props.orders[this.state.nr].orderData.deliveryMethod}</p></div>
+                <div>Status:
+                    <p className={classes.Data}>{this.props.orders[this.state.nr].finish ? "Finish" : "In progress"}</p></div>
             </Modal>;
         }
         if (!this.props.loading) {
@@ -74,9 +94,13 @@ class Orders extends Component {
                             key={order.id}
                             orderId={order.id}
                             ingredients={order.ingredients}
+                            finish={order.finish}
                             price={+order.price}
+                            isAdmin={this.props.isAdmin}
                             remove={() => this.removeOrderHandler(order.id)}
-                            details={() => this.orderViewDetailsHandler(order.id, order.nr)}/>
+                            details={() => this.orderViewDetailsHandler(order.id, order.nr)}
+                            cancelFinishOrder={() => this.finishOrderHandler(order.id, false)}
+                            finishOrder={() => this.finishOrderHandler(order.id, true)}/>
                     ))}
                 </div>
             );
@@ -96,15 +120,17 @@ const mapStateToProps = state => {
         orders: state.order.orders,
         loading: state.order.loading,
         token: state.auth.token,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        isAdmin: state.auth.isAdmin
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId)),
+        onFetchOrders: (token, userId, isAdmin) => dispatch(actions.fetchOrders(token, userId, isAdmin)),
         onFetchOrdersStart: () => dispatch(actions.fetchOrdersStart()),
-        onRemoveOrder: (orderId, token) => dispatch(actions.removeOrder(orderId, token))
+        onRemoveOrder: (orderId, token, userId, isAdmin) => dispatch(actions.removeOrder(orderId, token, userId, isAdmin)),
+        onFinishOrder: (orderId, token, userId, isAdmin, status) => dispatch(actions.finishOrder(orderId, token, userId, isAdmin, status))
     };
 };
 

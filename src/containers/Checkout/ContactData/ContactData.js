@@ -141,7 +141,8 @@ class ContactData extends Component {
             ingredients: this.props.ig,
             price: this.props.pri,
             orderData: formData,
-            userId: this.props.userId
+            userId: this.props.userId,
+            finish: false
         };
 
         this.props.onOrderBurger(order, this.props.token);
@@ -174,26 +175,27 @@ class ContactData extends Component {
             })
         }
 
-        let form = (
-            <form onSubmit={this.orderHandler}>
-                {formElementsArray.map(inputEl => (
-                    <Input
-                        key={inputEl.id}
-                        valueName={inputEl.id}
-                        elementType={inputEl.config.elementType}
-                        elementConfig={inputEl.config.elementConfig}
-                        value={inputEl.config.value}
-                        invalid={!inputEl.config.valid}
-                        touched={inputEl.config.touched}
-                        shouldValidate={inputEl.config.validation}
-                        changed={(event) => this.inputChangeHandler(event, inputEl.id)}/>
-                ))}
-                <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
-            </form>
-        );
 
-        if (this.props.loading) {
-            form = <Spinner />
+        let form = <Spinner />;
+
+        if (!this.props.loading) {
+            form = (
+                <form onSubmit={this.orderHandler}>
+                    {formElementsArray.map(inputEl => (
+                        <Input
+                            key={inputEl.id}
+                            valueName={inputEl.id}
+                            elementType={inputEl.config.elementType}
+                            elementConfig={inputEl.config.elementConfig}
+                            value={inputEl.config.value}
+                            invalid={!inputEl.config.valid}
+                            touched={inputEl.config.touched}
+                            shouldValidate={inputEl.config.validation}
+                            changed={(event) => this.inputChangeHandler(event, inputEl.id)}/>
+                    ))}
+                    <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
+                </form>
+            );
         }
 
         return(

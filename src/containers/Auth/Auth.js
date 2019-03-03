@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './Auth.css';
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -9,7 +9,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 
-class Auth extends Component {
+class Auth extends PureComponent {
     state = {
         controls: {
             email: {
@@ -154,7 +154,7 @@ class Auth extends Component {
 
         let authRedirect = null;
 
-        if (this.props.isAuth) {
+        if (this.props.isAuth === true) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
 
@@ -191,4 +191,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));

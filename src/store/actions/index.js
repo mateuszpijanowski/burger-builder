@@ -10,7 +10,8 @@ export {
     purchaseBurgerStart,
     fetchOrders,
     fetchOrdersStart,
-    removeOrder
+    removeOrder,
+    finishOrder
 } from './order';
 export {
     auth,

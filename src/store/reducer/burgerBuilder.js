@@ -6,7 +6,8 @@ const initState = {
     igPrice: null,
     totalPrice: 5,
     error: false,
-    loading: false
+    loading: false,
+    building: false
 };
 
 const addIngredients = (state, action) => {
@@ -37,7 +38,6 @@ const setIngredients = (state, action) => {
         ingredients: action.ingredients,
         error: false,
         loading: false,
-        building: false
     });
 };
 

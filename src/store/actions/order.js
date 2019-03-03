@@ -48,11 +48,25 @@ export const fetchOrdersStart = () => {
     };
 };
 
-export const removeOrder = (orderId, token) => {
+export const finishOrder = (orderId, token, userId, isAdmin, status) => {
     return dispatch => {
+        axios.put('/orders/'+orderId+'/finish.json?auth=' + token, status)
+            .then(res => {
+                dispatch(fetchOrders(token, userId, isAdmin));
+            })
+            .catch(err => {
+                dispatch(fetchOrdersFail(err));
+            })
+    };
+};
+
+export const removeOrder = (orderId, token, userId, isAdmin) => {
+    return dispatch => {
+        dispatch(fetchOrdersStart());
         axios.delete('/orders/'+orderId+'.json?auth=' + token)
             .then(res => {
-                dispatch(fetchOrders());
+                console.log(res);
+                dispatch(fetchOrders(token, userId, isAdmin));
             })
             .catch(err => {
                 dispatch(fetchOrdersFail(err));
@@ -72,10 +86,12 @@ export const purchaseBurger = (orderData, token) => {
     };
 };
 
-export const fetchOrders = (token, userId) => {
+export const fetchOrders = (token, userId, isAdmin) => {
     return dispatch => {
-
-        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+        let queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+        if (isAdmin === true) {
+            queryParams = '?auth=' + token;
+        }
         axios.get('/orders.json' + queryParams)
             .then(res => {
                 let i = 0;

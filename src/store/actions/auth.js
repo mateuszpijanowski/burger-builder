@@ -7,11 +7,12 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, isAdmin) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
-        userId: userId
+        userId: userId,
+        isAdmin: isAdmin
     };
 };
 
@@ -26,6 +27,7 @@ export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
+    localStorage.removeItem('isAdmin');
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -62,12 +64,16 @@ export const auth = (email, password, isSignUp) => {
 
         axios.post(url, authData)
             .then(res => {
-                console.log(res);
+                let isAdmin = false;
+                if (res.data.localId === "qLJVe9OOJjhn7leD6cpYUxYUeOt1") {
+                    isAdmin = true;
+                }
                 const expirationDate = new Date(new Date().getTime() + res.data.expiresIn * 1000);
                 localStorage.setItem('token', res.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
                 localStorage.setItem('userId', res.data.localId);
-                dispatch(authSuccess(res.data.idToken, res.data.localId));
+                localStorage.setItem('isAdmin', isAdmin);
+                dispatch(authSuccess(res.data.idToken, res.data.localId, isAdmin));
                 dispatch(checkAuthTimeout(res.data.expiresIn));
             })
             .catch(err => {
@@ -88,7 +94,8 @@ export const authCheckState = () => {
                 dispatch(logout());
             } else {
                 const userId = localStorage.getItem('userId');
-                dispatch(authSuccess(token, userId));
+                const isAdmin = localStorage.getItem('isAdmin');
+                dispatch(authSuccess(token, userId, isAdmin));
                 dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
             }
         }
