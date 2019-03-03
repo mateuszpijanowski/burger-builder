@@ -22,7 +22,7 @@ class BurgerBuilder extends Component {
     }
 
     purchaseHandler = () => {
-        if (!this.props.isAuth) {
+        if (this.props.isAuth) {
             this.setState({ purchasing: true });
         } else {
             this.props.onSetAuthRedirectPath('/checkout');
@@ -118,7 +118,7 @@ const mapStateToProps = state => {
         igPrice: state.burgerBuilder.igPrice,
         error: state.burgerBuilder.error,
         loading: state.burgerBuilder.loading,
-        isAuth: state.auth.isAuth !== null
+        isAuth: state.auth.token !== null
     }
 };
 
