@@ -4,9 +4,10 @@ import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
-import * as actions from '../../../store/actions/index';
+import { updateObject, checkValidity } from '../../../shared/utility';
 
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component {
     state = {
@@ -107,28 +108,6 @@ class ContactData extends Component {
         formIsValid: false
     };
 
-    static checkValidity(value, rules) {
-        let isValid = true;
-
-        if (!rules) {
-            return true;
-        }
-
-        if(rules.required && isValid) {
-            isValid = value.trim() !== "";
-        }
-
-        if(rules.minLength && isValid) {
-            isValid = value.length >= rules.minLength;
-        }
-
-        if(rules.maxLength && isValid) {
-            isValid = value.length <= rules.maxLength;
-        }
-
-        return isValid;
-    }
-
     orderHandler = (event) => {
         event.preventDefault();
         this.props.onStartBurger();
@@ -149,13 +128,15 @@ class ContactData extends Component {
     };
 
     inputChangeHandler = (event, inputID) => {
-        const orderFormCopy = { ...this.state.orderForm };
-        const inputElCopy = { ...orderFormCopy[inputID] };
+        const inputElCopy = updateObject(this.state.orderForm[inputID], {
+            value: event.target.value,
+            valid: checkValidity(event.target.value, this.state.orderForm[inputID].validation),
+            touched: true,
+        });
 
-        inputElCopy.value = event.target.value;
-        inputElCopy.valid = ContactData.checkValidity(inputElCopy.value, inputElCopy.validation);
-        inputElCopy.touched = true;
-        orderFormCopy[inputID] = inputElCopy;
+        const orderFormCopy = updateObject(this.state.orderForm, {
+            [inputID]: inputElCopy
+        });
 
         let formIsValid = true;
 

@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../utility';
+import { updateObject } from '../../shared/utility';
 
 const initState = {
     ingredients: null,
@@ -22,11 +22,11 @@ const addIngredients = (state, action) => {
 };
 
 const removeIngredients = (state, action) => {
-    const updatedIngredientR = { [action.igType]: state.ingredients[action.igType] + 1 };
+    const updatedIngredientR = { [action.igType]: state.ingredients[action.igType] - 1 };
     const updatedIngredientsR = updateObject(state.ingredients, updatedIngredientR);
     const updatedStateR = {
         ingredients: updatedIngredientsR,
-        totalPrice: state.totalPrice + state.igPrice[action.igType],
+        totalPrice: state.totalPrice - state.igPrice[action.igType],
         building: true
     };
     return updateObject(state, updatedStateR);

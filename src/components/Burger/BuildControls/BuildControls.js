@@ -1,6 +1,7 @@
 import React from 'react';
-import BuildControl from './BuildControl/BuildControl';
 import classes from './BuildControls.css';
+
+import BuildControl from './BuildControl/BuildControl';
 
 const buildControls = (props) => {
     const ingredientsCount = Object.keys(props.ingredients)
@@ -19,12 +20,12 @@ const buildControls = (props) => {
 
             {controls.map(ctrl => {
                 return <BuildControl
-                    key={ctrl.label}
-                    label={ctrl.label}
-                    ingredientsCount={ctrl.count}
-                    ingredientAdded={() => props.ingredientAdded(ctrl.type)}
+                    key={ ctrl.label }
+                    label={ ctrl.label }
+                    ingredientsCount={ ctrl.count }
                     ingredientRemove={() => props.ingredientRemove(ctrl.type)}
-                    disabled={props.disabled[ctrl.type]}/>;
+                    ingredientAdded={() => props.ingredientAdded(ctrl.type)}
+                    disabled={ props.disabled[ctrl.type] }/>;
             })}
             <button
                 className={classes.OrderButton}
@@ -36,4 +37,3 @@ const buildControls = (props) => {
 };
 
 export default buildControls;
-

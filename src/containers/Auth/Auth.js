@@ -5,6 +5,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { updateObject, checkValidity } from '../../shared/utility';
 
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
@@ -50,41 +51,17 @@ class Auth extends PureComponent {
         }
     }
 
-    static checkValidity(value, rules) {
-        let isValid = true;
-
-        if (!rules) {
-            return true;
-        }
-
-        if(rules.required && isValid) {
-            isValid = value.trim() !== "";
-        }
-
-        if(rules.minLength && isValid) {
-            isValid = value.length >= rules.minLength;
-        }
-
-        if(rules.maxLength && isValid) {
-            isValid = value.length <= rules.maxLength;
-        }
-
-        return isValid;
-    }
-
     inputChangeHandler = (event, controlName) => {
-        const updatedControls = {
-            ...this.state.controls,
-            [controlName]: {
-                ...this.state.controls[controlName],
+        const updatedControls = updateObject(this.state.controls, {
+            [controlName]: updateObject(this.state.controls[controlName], {
                 value: event.target.value,
-                valid: Auth.checkValidity(
+                valid: checkValidity(
                     event.target.value,
                     this.state.controls[controlName].validation
                 ),
                 touched: true
-            }
-        };
+            })
+        });
         this.setState({ controls: updatedControls });
     };
 
