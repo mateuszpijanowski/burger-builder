@@ -22,7 +22,7 @@ const asyncAuth = asyncComponent(() => {
 /*
     TODO:
         1. Create advanced validation system
-        2. Testing
+        2. Testing*
         3. Create README file
         4. Deploy project
         *Clear and upgrade quality code
