@@ -5,7 +5,7 @@
 **MyBurger** is a web application where you can create own burger by burger builder system.
 Next, in simulation you can order your burger and see list, data and status of your orders.
 
-<p align="center"><img src="https://github.com/mateuszpijanowski/kingofwhiskey/blob/master/src/assets/images/myburger_interview.gif" alt="MyBurger_interview" /></p>
+<p align="center"><img src="https://github.com/mateuszpijanowski/burger-builder/blob/master/src/assets/images/myburger_interview.gif" alt="MyBurger_interview" width="250px" /></p>
 
 ## Basic features  
   
@@ -34,7 +34,7 @@ Next, in simulation you can order your burger and see list, data and status of y
 - Node <i>11.9.0</i>  
 - Webpack <i>4.19.1</i>
 
-### ToDo:
+### ToDo list
 
 - Create advanced validation system :heavy_minus_sign:
 - Finish unit testing :heavy_minus_sign:
