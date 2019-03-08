@@ -22,7 +22,8 @@ class Auth extends PureComponent {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 3
+                    minLength: 5,
+                    normalCharacters: true
                 },
                 valid: false,
                 touched: false
@@ -36,7 +37,8 @@ class Auth extends PureComponent {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                    minLength: 6,
+                    password: true
                 },
                 valid: false,
                 touched: false

@@ -20,7 +20,8 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    normalCharacters: true
                 },
                 valid: false,
                 touched: false
@@ -46,7 +47,8 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    normalCharacters: true
                 },
                 valid: false,
                 touched: false

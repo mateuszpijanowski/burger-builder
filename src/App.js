@@ -19,15 +19,6 @@ const asyncAuth = asyncComponent(() => {
     return import('./containers/Auth/Auth');
 });
 
-/*
-    TODO:
-        1. Create advanced validation system
-        2. Testing*
-        3. Create README file
-        4. Deploy project
-        *Clear and upgrade quality code
- */
-
 class App extends Component {
     componentDidMount() {
         this.props.onAuthCheckState();

@@ -4,9 +4,23 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  zoom: 140%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@media (max-width: 1050px) {
+  body {
+    zoom: 165%;
+  }
+}
+
+@media (max-width: 550px) {
+  body {
+    zoom: 110%;
+  }
+}
+
+@media (max-width: 385px) {
+  body {
+    zoom: 90%;
+  }
 }
