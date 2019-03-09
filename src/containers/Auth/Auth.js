@@ -23,7 +23,7 @@ class Auth extends PureComponent {
                 validation: {
                     required: true,
                     minLength: 5,
-                    normalCharacters: true
+                    email: true
                 },
                 valid: false,
                 touched: false
@@ -69,7 +69,22 @@ class Auth extends PureComponent {
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSingUp);
+
+        if (this.state.controls.email.value==='') {
+            let controlsUpdate = { ...this.state.controls };
+            controlsUpdate.email.touched = true;
+            this.setState({ controls: controlsUpdate })
+        }
+
+        if (this.state.controls.password.value==='') {
+            let controlsUpdate = { ...this.state.controls };
+            controlsUpdate.password.touched = true;
+            this.setState({ controls: controlsUpdate })
+        }
+
+        if (this.state.controls.email.valid && this.state.controls.password.valid) {
+            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSingUp);
+        }
     };
 
     switchAuthModeHandler = () => {

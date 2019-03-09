@@ -9,14 +9,12 @@ export const checkValidity = (value, rules) => {
     let isValid = true;
 
     // Regex
-/*    const password = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-    const phone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-
-
-    const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-    const onlyNumbers = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-    const email = /[^!#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
-    const numbers = /[0-9]/;*/
+    const password = /(?=.*[\W])(?=.*[\d])(?=.*[\w])/;
+    const email = /(?=.*[~`!#$%^&*()_\-+={}[\]:;"'|<>?,/])/;
+    const street = /(?=.*[~`!@#$%^&*()_\-+={}[\]:;"'|<>?])/;
+    const name = /(?=.*[\W])|(?=.*[\d])/;
+    const number = /^\d+$/;
+    const country = /(?=.*[\W])|(?=.*[\d])/;
 
     if (!rules) {
         return true;
@@ -34,13 +32,33 @@ export const checkValidity = (value, rules) => {
         isValid = value.length <= rules.maxLength;
     }
 
-/*    if(rules.normalCharacters && isValid) {
-        isValid = !specialCharacters.test(value);
+    if(rules.password && isValid) {
+        isValid = password.test(value);
     }
 
-    if(rules.password && isValid) {
-        isValid = specialCharacters.test(value) && numbers.test(value);
-    }*/
+    if(rules.email && isValid) {
+        isValid = !email.test(value);
+    }
+
+    if(rules.street && isValid) {
+        isValid = !street.test(value);
+    }
+
+    if(rules.name && isValid) {
+        isValid = !name.test(value);
+    }
+
+    if(rules.phone && isValid) {
+        isValid = number.test(value);
+    }
+
+    if(rules.zipCode && isValid) {
+        isValid = number.test(value);
+    }
+
+    if(rules.country && isValid) {
+        isValid = !country.test(value);
+    }
 
     return isValid;
 };

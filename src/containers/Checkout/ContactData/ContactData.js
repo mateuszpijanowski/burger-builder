@@ -21,7 +21,9 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    normalCharacters: true
+                    name: true,
+                    minLength: 5,
+                    maxLength: 20
                 },
                 valid: false,
                 touched: false
@@ -34,7 +36,9 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    street: true,
+                    minLength: 5,
                 },
                 valid: false,
                 touched: false
@@ -48,7 +52,8 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    normalCharacters: true
+                    email: true,
+                    minLength: 5,
                 },
                 valid: false,
                 touched: false
@@ -61,7 +66,10 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    phone: true,
+                    minLength: 9,
+                    maxLength: 9
                 },
                 valid: false,
                 touched: false
@@ -76,7 +84,8 @@ class ContactData extends Component {
                 validation: {
                     required: true,
                     minLength: 5,
-                    maxLength: 5
+                    maxLength: 5,
+                    zipCode: true
                 },
                 valid: false,
                 touched: false
@@ -89,7 +98,9 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    country: true,
+                    minLength: 3,
                 },
                 valid: false,
                 touched: false

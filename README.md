@@ -36,7 +36,6 @@ Next, in simulation you can order your burger and see list, data and status of y
 
 ### ToDo:
 
-- Create advanced validation system :heavy_minus_sign:
 - Finish unit testing :heavy_minus_sign:
 - Add About page :x:
 - Clear and upgrade quality of code :heavy_minus_sign:

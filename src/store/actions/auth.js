@@ -65,7 +65,7 @@ export const auth = (email, password, isSignUp) => {
         axios.post(url, authData)
             .then(res => {
                 let isAdmin = false;
-                if (res.data.localId === "qLJVe9OOJjhn7leD6cpYUxYUeOt1") {
+                if (res.data.localId === "wQoE5u5U2NYnFiymrWXTO7IyLAG3") {
                     isAdmin = true;
                 }
                 const expirationDate = new Date(new Date().getTime() + res.data.expiresIn * 1000);
