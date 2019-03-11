@@ -1,15 +1,23 @@
 .Modal {
+    overflow: auto;
+    max-height: 70%;
     position: fixed;
     z-index: 500;
     background-color: white;
-    width: 70%;
+    width: 80%;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px black;
     padding: 16px;
-    left: 15%;
+    left: 10%;
     top: 16%;
     box-sizing: border-box;
-    transition: all 0.3s ease-out;
+    animation-name: Open;
+    animation-duration: 500ms;
+}
+
+@-webkit-keyframes Open {
+    from {transform: translateY(100em);}
+    to {transform: translateX(0);}
 }
 
 @media (min-width: 600px) {

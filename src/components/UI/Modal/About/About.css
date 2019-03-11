@@ -1,0 +1,35 @@
+.Content {
+    text-align: center;
+}
+
+.Content h2 {
+    margin-top: 0;
+    letter-spacing: 2px;
+}
+
+.Content p {
+    letter-spacing: 0.1em;
+}
+
+.Github img {
+    margin-top: 10px;
+    transition: all 0.3s ease-out;
+    height: 64px;
+    opacity: 0.7;
+}
+
+.Github img:hover {
+    opacity: 1;
+}
+
+.Logo {
+    margin-top: 10px;
+    height: 165px;
+}
+
+.Copy {
+    font-size: 10px;
+    color: grey;
+    margin-top: 0;
+    margin-bottom: 0;
+}
