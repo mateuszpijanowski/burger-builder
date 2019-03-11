@@ -21,6 +21,7 @@ const sideDrawer = (props) => {
                 </div>
                 <nav>
                     <NavigationItems
+                        aboutToggle={props.aboutToggle}
                         isAuth={props.isAuth}
                         closed={props.closed} />
                 </nav>

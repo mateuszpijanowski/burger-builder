@@ -11,6 +11,7 @@ const navigationItems = (props) => (
         { !props.isAuth
             ? <NavigationItem closed={props.closed} link="/auth">Authentication</NavigationItem>
             : <NavigationItem closed={props.closed} link="/logout">Logout</NavigationItem> }
+        <NavigationItem closed={props.closed} aboutToggle={props.aboutToggle} link="#">About</NavigationItem>
     </ul>
 );
 

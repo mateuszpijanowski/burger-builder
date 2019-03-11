@@ -38,7 +38,6 @@ Next, in simulation you can order your burger and see list, data and status of y
 ### ToDo list
 
 - Finish unit testing :heavy_minus_sign:
-- Add About page :heavy_minus_sign:
 - Clear and upgrade quality of code :heavy_minus_sign:
 
 #### Legend:
