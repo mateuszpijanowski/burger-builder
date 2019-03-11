@@ -1,5 +1,6 @@
 # MyBurger
 [![Build Status](https://travis-ci.org/mateuszpijanowski/burger-builder.svg?branch=master)](https://travis-ci.org/mateuszpijanowski/burger-builder)
+[![BCH compliance](https://bettercodehub.com/edge/badge/mateuszpijanowski/burger-builder?branch=master)](https://bettercodehub.com/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a2afd351-7f3e-4a4f-9656-55d4013ec11f/deploy-status)](https://app.netlify.com/sites/myburger/deploys)
 
 **MyBurger** is a web application where you can create own burger by burger builder system.
@@ -37,7 +38,6 @@ Next, in simulation you can order your burger and see list, data and status of y
 ### ToDo list
 
 - Finish unit testing :heavy_minus_sign:
-- Add About page :x:
 - Clear and upgrade quality of code :heavy_minus_sign:
 
 #### Legend:

@@ -16,11 +16,11 @@ describe('<NavigationItems />', () => {
     });
 
     it('should render two <NavigationItems /> elements if auth is false', () => {
-        expect(wrapper.find(NavigationItem)).toHaveLength(2);
+        expect(wrapper.find(NavigationItem)).toHaveLength(3);
     });
     it('should render three <NavigationItems /> elements if auth is true', () => {
         wrapper.setProps({ isAuth: true });
-        expect(wrapper.find(NavigationItem)).toHaveLength(3);
+        expect(wrapper.find(NavigationItem)).toHaveLength(4);
     });
     it('should render three <NavigationItems /> elements if auth is true', () => {
         wrapper.setProps({ isAuth: true });

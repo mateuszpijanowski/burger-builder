@@ -3,7 +3,7 @@ import classes from './NavigationItem.css';
 import { NavLink } from "react-router-dom";
 
 const navigationItem = (props) => (
-    <li onClick={props.closed} className={classes.NavigationItem}>
+    <li onClick={props.aboutToggle ? props.aboutToggle : props.closed} className={classes.NavigationItem}>
         <NavLink
             to={props.link}
             exact
