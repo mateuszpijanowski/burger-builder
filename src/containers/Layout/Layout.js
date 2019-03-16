@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/Aux/aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import Modal from '../../components/UI/Modal/Modal';
@@ -40,8 +39,8 @@ class Layout extends Component {
         );
 
         return (
-            <Aux>
-                { this.state.showAbout ? aboutComponent : null }
+            <React.Fragment>
+                { aboutComponent }
                 <Toolbar
                     isAuth={this.props.isAuth}
                     aboutToggle={this.aboutToggleHandler}
@@ -54,7 +53,7 @@ class Layout extends Component {
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>
-            </Aux>
+            </React.Fragment>
         );
     }
 }

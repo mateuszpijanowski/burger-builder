@@ -27,6 +27,7 @@ Next, in simulation you can order your burger and see list, data and status of y
 - React Redux <i>6.0.1</i>  
 - Redux <i>4.0.1</i>  
 - Redux Thunk <i>2.3.0+</i>  
+- React Transition Group <i>2.6.0+</i>  
 - Jest <i>24.3.0</i>  
 - Enzyme <i>3.9.0</i>  
 - Firebase 

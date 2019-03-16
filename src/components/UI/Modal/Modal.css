@@ -11,13 +11,36 @@
     left: 10%;
     top: 16%;
     box-sizing: border-box;
-    animation-name: Open;
-    animation-duration: 500ms;
 }
 
-@-webkit-keyframes Open {
-    from {transform: translateY(100em);}
-    to {transform: translateX(0);}
+.fade-enter-active {
+    animation: openModal 0.4s ease-out forwards;
+}
+
+.fade-exit-active {
+    animation: closeModal 0.6s ease-out forwards;
+}
+
+@keyframes openModal {
+    0% {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes closeModal {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(200%);
+    }
 }
 
 @media (min-width: 1050px) {

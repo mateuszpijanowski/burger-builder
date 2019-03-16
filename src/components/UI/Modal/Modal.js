@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Modal.css';
-import Aux from '../../../hoc/Aux/aux';
 import Backdrop from '../Backdrop/Backdrop';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 class Modal extends Component {
 
@@ -10,18 +10,29 @@ class Modal extends Component {
     }
 
     render() {
+        const animationTiming = {
+            enter: 400,
+            exit: 600
+        };
+
         return (
-            <Aux>
+            <React.Fragment>
                 <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
-                <div
-                    className={classes.Modal}
-                    style={{
-                        transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                        opacity: this.props.show ? '1' : '0'
+                <CSSTransition
+                    in={this.props.show}
+                    timeout={animationTiming}
+                    mountOnEnter
+                    unmountOnExit
+                    classNames={{
+                        enterActive: classes["fade-enter-active"],
+                        exitActive: classes["fade-exit-active"]
                     }}>
-                    {this.props.children}
-                </div>
-            </Aux>
+                    <div
+                        className={classes.Modal}>
+                        {this.props.children}
+                    </div>
+                </CSSTransition>
+            </React.Fragment>
         );
     }
 }
